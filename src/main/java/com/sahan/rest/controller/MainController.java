@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/rest/mainController")
 public class MainController {
     private final String APPLICATION_JSON = "application/json";
-    // Handler method to produce text response
+
     @RequestMapping(value = "/index", method = RequestMethod.GET, produces = {APPLICATION_JSON})
     public String index() {
-        return "Spring MVC - REST Controller Hello World example.";
+        return "Hello World REST example.!";
     }
 }
