@@ -5,14 +5,19 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBuilder;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@EnableTransactionManagement
+@PropertySource(value = { "classpath:database.properties" })
 public class DatasourceConfig {
 
     @Bean
@@ -57,8 +62,11 @@ public class DatasourceConfig {
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
+        properties.put("hibernate.connection.driver_class", "com.mysql.cj.jdbc.Driver");
+        properties.put("hibernate.connection.url", "jdbc:mysql://localhost:3306/webservice_db");
+        properties.put("hibernate.connection.username", "root");
+        properties.put("hibernate.connection.password", "root");
         properties.put("hbm2ddl.auto", "update");
         return properties;
     }
-
 }
